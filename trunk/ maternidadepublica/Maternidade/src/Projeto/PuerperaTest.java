@@ -35,12 +35,12 @@ public class PuerperaTest {
 		Assert
 				.assertEquals(
 						"String errada. ",
-						"Nome: Maria\nCor: Caucasiana   Data Nascimento: 27/10/1879\nEndereco: Maciel pinheiro\nTelefone: 88888888   Data de Admição: 27/05/2010\nObservacao Saude: boa",
+						"Nome: Maria\nCor: Caucasiana   Data Nascimento: 27/10/1879\nEndereco: Maciel pinheiro\nTelefone: 88888888   Data de Admissão: 27/05/2010\nObservacao Saude: boa",
 						p1.toString());
 		Assert
 				.assertEquals(
 						"String errada. ",
-						"Nome: Teresa\nCor: Pardo   Data Nascimento: 02/08/1882\nEndereco: marechal\nTelefone: 88880000   Data de Admição: 27/05/2010\nObservacao Saude: estavel",
+						"Nome: Teresa\nCor: Pardo   Data Nascimento: 02/08/1882\nEndereco: marechal\nTelefone: 88880000   Data de Admissão: 27/05/2010\nObservacao Saude: estavel",
 						p2.toString());
 
 	}
@@ -77,9 +77,9 @@ public class PuerperaTest {
 	@Test
 	public void testGetDataAdmissao() {
 
-		Assert.assertEquals("Data errada. ", p2.getDataAdmicao(), "27/05/2010");
-		Assert.assertTrue("Datas diferentes. ", p1.getDataAdmicao().equals(
-				p2.getDataAdmicao()));
+		Assert.assertEquals("Data errada. ", p2.getDataAdmissao(), "27/05/2010");
+		Assert.assertTrue("Datas diferentes. ", p1.getDataAdmissao().equals(
+				p2.getDataAdmissao()));
 
 	}
 

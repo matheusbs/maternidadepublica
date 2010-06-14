@@ -22,8 +22,12 @@ public class Main {
 
 	private static Cadastramento maternidade;
 
+	private static Consulta consulta1;
+
 	public static void main(String[] args) throws Exception {
+
 		int opcao = 0;
+
 		maternidade = new Cadastramento();
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(
@@ -41,7 +45,9 @@ public class Main {
 			System.out.println("4 - RemoverRecém Nascido. ");
 			System.out.println("5 - Pesquisar Puerpera");
 			System.out.println("6 - Pesquisar Recem Nascido");
-			System.out.println("7 - Sair.\n");
+			System.out.println("7 - Marcar Consulta. ");
+			System.out.println("8 - Balanço do dia. ");
+			System.out.println("9 - Sair.\n");
 			System.out.println("Selecione sua Opção: ");
 			opcao = sc.nextInt();
 
@@ -55,7 +61,7 @@ public class Main {
 				pontoReferencia,
 				observacaoSaude = "",
 				telefone = "",
-				dataAdimicao = "",
+				dataAdmissao = "",
 				dataNascimento = "";
 
 				while (nome.equals("")) {
@@ -93,10 +99,10 @@ public class Main {
 				System.out.println("Telefone: ");
 				telefone = input.readLine().trim();
 
-				while (dataAdimicao.equals("")) {
+				while (dataAdmissao.equals("")) {
 					System.out.println("Data de Adimição: ");
-					dataAdimicao = input.readLine().trim();
-					if (dataAdimicao.equals("")) {
+					dataAdmissao = input.readLine().trim();
+					if (dataAdmissao.equals("")) {
 						System.out.println("Campo obrigatório. ");
 					}
 				}
@@ -108,7 +114,7 @@ public class Main {
 					}
 				}
 				puerpera = new Puerpera(nome, cor, dataNascimento, endereco,
-						pontoReferencia, telefone, dataAdimicao,
+						pontoReferencia, telefone, dataAdmissao,
 						observacaoSaude);
 				maternidade.addPuerpera(puerpera);
 				break;
@@ -216,8 +222,127 @@ public class Main {
 
 			case 7:
 
+				Puerpera puerpera = null;
+				String dataConsulta = "",
+				consulta = "",
+				tipoConsulta = "",
+				confirmaCadastro = "",
+				nomePaciente = "";
+
+				while (tipoConsulta.equals("")) {
+
+					System.out.println("A consulta é normal ou urgente? ");
+					tipoConsulta = input.readLine().trim().toLowerCase();
+
+				}
+				while (confirmaCadastro.equals("")) {
+
+					System.out.println("A puerpera ja possui cadastro? ");
+					confirmaCadastro = input.readLine().trim().toLowerCase();
+
+				}
+				if (confirmaCadastro.equals("s")
+						|| confirmaCadastro.equals("sim")) {
+
+					while (nomePaciente.equals("")) {
+
+						System.out.println("Qual o nome da paciente? ");
+						nomePaciente = input.readLine();
+
+					}
+					puerpera = maternidade.contemPuerpera(nomePaciente);
+					if (puerpera.equals(null)) {
+						System.out.println("Puerpera ao foi encontrada. ");
+						confirmaCadastro = "nao";
+					}
+
+				}
+				if (confirmaCadastro.equals("n")
+						|| confirmaCadastro.equals("nao")
+						|| confirmaCadastro.equals("não")) {
+
+					String nome1 = "", cor1 = "", endereco1 = "", pontoReferencia1, observacaoSaude1 = "", telefone1 = "", dataAdmissao1 = "", dataNascimento1 = "";
+
+					while (nome1.equals("")) {
+						System.out.println("Nome: ");
+						nome1 = input.readLine().trim();
+						if (nome1.equals("")) {
+							System.out.println("Campo obrigatório. ");
+						}
+					}
+					while (cor1.equals("")) {
+						System.out.println("Cor: ");
+						cor1 = input.readLine().trim();
+						if (cor1.equals("")) {
+							System.out.println("Campo obrigatório. ");
+						}
+					}
+					while (endereco1.equals("")) {
+						System.out.println("Endereço: ");
+						endereco1 = input.readLine().trim();
+						if (endereco1.equals("")) {
+							System.out.println("Campo obrigatório. ");
+						}
+					}
+
+					System.out.println("Ponto de Referencia: ");
+					pontoReferencia1 = input.readLine().trim();
+
+					while (observacaoSaude1 == "") {
+						System.out.println("Observação de Saude: ");
+						observacaoSaude1 = input.readLine().trim();
+						if (observacaoSaude1.equals("")) {
+							System.out.println("Campo obrigatório. ");
+						}
+					}
+					System.out.println("Telefone: ");
+					telefone1 = input.readLine().trim();
+
+					while (dataAdmissao1.equals("")) {
+						System.out.println("Data de Adimição: ");
+						dataAdmissao1 = input.readLine().trim();
+						if (dataAdmissao1.equals("")) {
+							System.out.println("Campo obrigatório. ");
+						}
+					}
+					while (dataNascimento1.equals("")) {
+						System.out.println("Data de Nascimento: ");
+						dataNascimento1 = input.readLine().trim();
+						if (dataNascimento1.equals("")) {
+							System.out.println("Campo obrigatório. ");
+						}
+					}
+					puerpera = new Puerpera(nome1, cor1, dataNascimento1,
+							endereco1, pontoReferencia1, telefone1,
+							dataAdmissao1, observacaoSaude1);
+					maternidade.addPuerpera(puerpera);
+				}
+				while (dataConsulta.equals("")) {
+
+					System.out.println("Qual a data da consulta? ");
+					dataConsulta = input.readLine().trim().toLowerCase();
+
+				}
+				while (consulta.equals("")) {
+
+					System.out.println("Qual sera a consulta ou exame? ");
+					consulta = input.readLine();
+
+				}
+
+				consulta1 = new Consulta(puerpera, dataConsulta, consulta,
+						tipoConsulta);
+				break;
+
+			case 8:
+				
+				System.out.println();
+				
+			case 9:
+
 				System.out.println("Fim.");
 				System.exit(1);
+
 			}
 		}
 	}

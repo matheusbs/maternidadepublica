@@ -16,6 +16,7 @@ public class Cadastramento {
 
 	private ArrayList<Puerpera> listaPuerpera = new ArrayList<Puerpera>();
 	private ArrayList<RecemNascido> listaRecem = new ArrayList<RecemNascido>();
+	private ArrayList<Consulta> listaConsulta = new ArrayList<Consulta>();
 
 	// Metodos
 
@@ -54,6 +55,41 @@ public class Cadastramento {
 	}
 
 	/**
+	 * Pesquisa uma Puerpera
+	 * 
+	 * @param nome
+	 *            - Nome da Puerpera
+	 * @return String contendo as informações da Puerpera
+	 */
+	public String pesquisaPuerpera(String nome) {
+		for (int i = 0; i < listaPuerpera.size(); i++) {
+			if (listaPuerpera.get(i).getNome().toLowerCase().equals(
+					nome.toLowerCase())) {
+				return listaPuerpera.get(i).toString();
+			}
+		}
+		return "Puerpera não encontrada. ";
+	}
+
+	/**
+	 * Verifica se contem Puerpera
+	 * 
+	 * @param nome
+	 *            - Nome da Puerpera
+	 * @return Puerpera
+	 */
+	public Puerpera contemPuerpera(String nome) {
+
+		for (int i = 0; i < listaPuerpera.size(); i++) {
+			if (listaPuerpera.get(i).getNome().toLowerCase().equals(
+					nome.toLowerCase())) {
+				return listaPuerpera.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Cadastra um Recem Nascido a Maternidade
 	 * 
 	 * @param recemNascido
@@ -88,23 +124,6 @@ public class Cadastramento {
 	}
 
 	/**
-	 * Pesquisa uma Puerpera
-	 * 
-	 * @param nome
-	 *            - Nome da Puerpera
-	 * @return String contendo as informações da Puerpera
-	 */
-	public String pesquisaPuerpera(String nome) {
-		for (int i = 0; i < listaPuerpera.size(); i++) {
-			if (listaPuerpera.get(i).getNome().toLowerCase().equals(
-					nome.toLowerCase())) {
-				return listaPuerpera.get(i).toString();
-			}
-		}
-		return "Puerpera não encontrada. ";
-	}
-
-	/**
 	 * Pesquisa um Recem Nascido
 	 * 
 	 * @param nome
@@ -119,5 +138,38 @@ public class Cadastramento {
 			}
 		}
 		return "Recem Nascido não encontrada. ";
+	}
+
+	public boolean addConsulta(Consulta consulta) {
+		for (int i = 0; i < listaConsulta.size(); i++) {
+			if (listaConsulta.get(i).equals(consulta)) {
+				return false;
+			}
+		}
+		listaConsulta.add(consulta);
+		return true;
+	}
+
+	public boolean removeConsulta(String nomePaciente) {
+		for (int i = 0; i < listaConsulta.size(); i++) {
+			if (listaConsulta.get(i).getPuerpera().getNome().equals(
+					nomePaciente)) {
+				listaConsulta.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String consultasAgendadas() {
+
+		String agenda = "";
+		for (int i = 0; i < listaConsulta.size(); i++) {
+
+			agenda = agenda + "\n" + listaConsulta.get(i).toString();
+
+		}
+
+		return agenda;
 	}
 }
