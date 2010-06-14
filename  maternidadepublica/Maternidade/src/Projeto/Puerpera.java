@@ -14,7 +14,7 @@ public class Puerpera extends Pessoa {
 	private String endereco;
 	private String pontoReferencia;
 	private String telefone;
-	private String dataAdimicao;
+	private String dataAdmissao;
 	private String observacaoSaude;
 
 	// Construtor
@@ -34,8 +34,8 @@ public class Puerpera extends Pessoa {
 	 *            - Um ponto de referencia
 	 * @param telefone
 	 *            - O telefone
-	 * @param dataAdimicao
-	 *            - A data de admição
+	 * @param dataAdmissao
+	 *            - A data de admissão
 	 * @param observacaoSaude
 	 *            - Sua observaçao de saude
 	 * @throws Exception
@@ -44,13 +44,13 @@ public class Puerpera extends Pessoa {
 	 */
 	public Puerpera(String nome, String cor, String dataNascimento,
 			String endereco, String pontoReferencia, String telefone,
-			String dataAdimicao, String observacaoSaude) throws Exception {
+			String dataAdmissao, String observacaoSaude) throws Exception {
 
 		super(nome, cor, dataNascimento);
 		this.endereco = endereco;
 		this.pontoReferencia = pontoReferencia;
 		this.telefone = telefone;
-		this.dataAdimicao = dataAdimicao;
+		this.dataAdmissao = dataAdmissao;
 		this.observacaoSaude = observacaoSaude;
 
 	}
@@ -85,12 +85,12 @@ public class Puerpera extends Pessoa {
 	}
 
 	/**
-	 * Recebe a Data de Admição
+	 * Recebe a Data de Admissão
 	 * 
-	 * @return retorna a data de admição
+	 * @return retorna a data de admissão
 	 */
-	public String getDataAdmicao() {
-		return this.dataAdimicao;
+	public String getDataAdmissao() {
+		return this.dataAdmissao;
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class Puerpera extends Pessoa {
 		return "Nome: " + getNome() + "\nCor: " + getCor()
 				+ "   Data Nascimento: " + getDataNascimento() + "\nEndereco: "
 				+ getEndereco() + "\nTelefone: " + getTelefone()
-				+ "   Data de Admição: " + getDataAdmicao()
+				+ "   Data de Admissão: " + getDataAdmissao()
 				+ "\nObservacao Saude: " + getObservacaoSaude();
 	}
 }
