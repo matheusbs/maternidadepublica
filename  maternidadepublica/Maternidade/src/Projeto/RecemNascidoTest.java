@@ -1,13 +1,3 @@
-/**
- * Projeto Maternidade Public de Gongolopolis
- * 
- * @author Glauber Juarez Barbosa Lopes
- * @author José Arthur Gadelha Alexandre
- * @author Matheus Batista Silva
- * 
- * Versão 1.0
- */
-
 package Projeto;
 
 import org.junit.Assert;
@@ -29,30 +19,40 @@ public class RecemNascidoTest {
 	}
 
 	@Test(expected = Exception.class)
-	public void testSexoVazio() throws Exception {
-
-		r3 = new RecemNascido("Pedro", "    ", "Amarelo", "27/05/2010", 2.0,
-				"1 semana", "bom");
-		r3 = new RecemNascido("Pedro", "", "Amarelo", "27/05/2010", 2.0,
-				"1 semana", "bom");
-
-	}
-
-	@Test(expected = Exception.class)
-	public void testSexoNull() throws Exception {
+	public void testConstrutorNull() throws Exception {
 
 		r3 = new RecemNascido("Pedro", null, "Amarelo", "27/05/2010", 2.0,
 				"1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", null, "27/05/2010", 2.0,
+				"1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", null, 2.0,
+				"1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", "27/05/2010",
+				2.0, null, "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", "27/05/2010",
+				2.0, "1 semana", null);
+		r3 = new RecemNascido(null, "Masculino", "Amarelo", "27/05/2010", 2.0,
+				"1 semana", "bom");
 
 	}
 
 	@Test(expected = Exception.class)
-	public void testPesoZeroOuNegativo() throws Exception {
+	public void testConstrutorVazio() throws Exception {
 
-		r3 = new RecemNascido("Pedro", "homem", "Amarelo", "27/05/2010", 0,
+		r3 = new RecemNascido("", "homem", "Amarelo", "27/05/2010", 0,
 				"1 semana", "bom");
 		r3 = new RecemNascido("Pedro", "", "Amarelo", "27/05/2010", -1,
 				"1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "", "27/05/2010", 2.0,
+				"1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", "", 2.0,
+				"1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", "27/05/2010",
+				-2.0, "1 semana", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", "27/05/2010",
+				2.0, "", "bom");
+		r3 = new RecemNascido("Pedro", "Masculino", "Amarelo", "27/05/2010",
+				2.0, "1 semana", "");
 
 	}
 
@@ -97,11 +97,18 @@ public class RecemNascidoTest {
 	public void testEqualsObject() throws Exception {
 		r3 = new RecemNascido("Pedro", "homem", "Amarelo", "27/05/2010", 2.0,
 				"1 semana", "bom");
-
+		r2 = new RecemNascido("joao", "homem", "Amarelo", "27/05/2010", 2.0,
+				"1 semana", "bom");
+		RecemNascido r4 = new RecemNascido("Pedro", "homem", "Amarelo",
+				"27/05/2010", 2.0, "1 semana", "bom");
+		RecemNascido r5 = new RecemNascido("Pedro", "homem", "Caucasiano",
+				"29/06/2010", 2.8, "1 mes", "regular");
 		Assert.assertEquals("São pacientes diferentes. ", r3, r1);
 		Assert.assertTrue("São pacientes diferentes. ", r3.equals(r1));
 		Assert.assertFalse("É o mesmo paciente. ", r2.equals(r1));
-
+		Assert.assertFalse("É o mesmo paciente. ", r3.equals(r2));
+		Assert.assertTrue("É o mesmo paciente. ", r3.equals(r4));
+		Assert.assertFalse("São pacientes diferentes. ", r5.equals(r4));
 	}
 
 	@Test

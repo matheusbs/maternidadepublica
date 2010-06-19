@@ -1,12 +1,3 @@
-/**
- * Projeto Maternidade Public de Gongolopolis
- * 
- * @author Glauber Juarez Barbosa Lopes
- * @author José Arthur Gadelha Alexandre
- * @author Matheus Batista Silva
- * 
- * Versão 1.0
- */
 
 package Projeto;
 

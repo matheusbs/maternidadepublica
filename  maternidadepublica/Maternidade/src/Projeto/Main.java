@@ -11,7 +11,11 @@
 package Projeto;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -20,15 +24,21 @@ public class Main {
 
 	private static RecemNascido recemNascido;
 
-	private static Cadastramento maternidade;
+	private static Maternidade maternidade;
 
 	private static Consulta consulta1;
 
+	private static Endereco endereco;
+
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 
 		int opcao = 0;
 
-		maternidade = new Cadastramento();
+		maternidade = new Maternidade();
 
 		BufferedReader input = new BufferedReader(new InputStreamReader(
 				System.in));
@@ -37,202 +47,384 @@ public class Main {
 
 		System.out.println("Bem vindo a Maternidade Gongolópoles. \n");
 
-		while (opcao >= 0 || opcao <= 3) {
+		while (opcao >= 0 || opcao <= 4) {
 			System.out.println("Menu: \n");
-			System.out.println("1 - Cadastrar Puérpera. ");
-			System.out.println("2 - Remover Puérpera. ");
-			System.out.println("3 - Cadastrar Recém Nascidos. ");
-			System.out.println("4 - RemoverRecém Nascido. ");
-			System.out.println("5 - Pesquisar Puerpera");
-			System.out.println("6 - Pesquisar Recem Nascido");
-			System.out.println("7 - Marcar Consulta. ");
-			System.out.println("8 - Balanço do dia. ");
-			System.out.println("9 - Sair.\n");
+			System.out.println("1 - Puérpera. ");
+			System.out.println("2 - Marcar Consulta. ");
+			System.out.println("3 - Visualizar consultas. ");
+			System.out.println("4 - Balanço do dia. ");
+			System.out.println("5 - Sair.\n");
 			System.out.println("Selecione sua Opção: ");
 			opcao = sc.nextInt();
 
 			switch (opcao) {
 
 			case 1:
+				int option = 0;
 
-				String nome = "",
-				cor = "",
-				endereco = "",
-				pontoReferencia,
-				observacaoSaude = "",
-				telefone = "",
-				dataAdmissao = "",
-				dataNascimento = "";
+				while (option >= 0 || option <= 3) {
+					System.out.println("1 - Cadastrar puerpera. ");
+					System.out.println("2 - Cadastrar Recem Nascido. ");
+					System.out.println("3 - Visualizar puerpera. ");
+					System.out.println("4 - Voltar ao menu principal.");
+					System.out.println("Selecione sua Opção: ");
+					option = sc.nextInt();
 
-				while (nome.equals("")) {
-					System.out.println("Nome: ");
-					nome = input.readLine().trim();
-					if (nome.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (cor.equals("")) {
-					System.out.println("Cor: ");
-					cor = input.readLine().trim();
-					if (cor.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (endereco.equals("")) {
-					System.out.println("Endereço: ");
-					endereco = input.readLine().trim();
-					if (endereco.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
+					switch (option) {
 
-				System.out.println("Ponto de Referencia: ");
-				pontoReferencia = input.readLine().trim();
+					case 1:
 
-				while (observacaoSaude == "") {
-					System.out.println("Observação de Saude: ");
-					observacaoSaude = input.readLine().trim();
-					if (observacaoSaude.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				System.out.println("Telefone: ");
-				telefone = input.readLine().trim();
+						String cpf = "",
+						nome = "",
+						tipoParto = "",
+						cor = "",
+						observacaoSaude = "",
+						telefone = "",
+						dataAdmissao = "",
+						dataNascimento = "",
+						rua = "",
+						numero = "",
+						cep = "",
+						bairro = "",
+						cidade = "",
+						estado = "",
+						complemento = "";
 
-				while (dataAdmissao.equals("")) {
-					System.out.println("Data de Adimição: ");
-					dataAdmissao = input.readLine().trim();
-					if (dataAdmissao.equals("")) {
-						System.out.println("Campo obrigatório. ");
+						while (nome.equals("")) {
+
+							System.out.println("Nome: ");
+							nome = input.readLine().trim();
+							if (nome.equals("") || nome.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(nome.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Digite apenas letras no nome. ");
+								nome = "";
+							}
+						}
+						while (cpf.equals("")) {
+							System.out.println("Cpf: ");
+							cpf = input.readLine().trim();
+							if (cpf.equals("") || cpf.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(cpf.matches("[0-9]*$"))) {
+								System.out.println("Digite apenas numeros. ");
+								cpf = "";
+							}
+						}
+						while (cor.equals("")) {
+
+							System.out.println("Cor: ");
+							cor = input.readLine().trim();
+							if (cor.equals("") || cor.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(cor.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Digite apenas letas na cor. ");
+								cor = "";
+							}
+						}
+						while (rua.equals("")) {
+							System.out.println("Rua: ");
+							rua = input.readLine().trim();
+							if (rua.equals("") || rua.equals(null)) {
+								System.out.println("Campo Obrigatório. ");
+							}
+						}
+						while (numero.equals("")) {
+							System.out.println("Numero: ");
+							numero = input.readLine().trim();
+							if (numero.equals("") || numero.equals(null)) {
+								System.out.println("Campo Obrigatório. ");
+							}
+							if (!(numero.matches("[0-9]*$"))) {
+								System.out.println("Digite apenas numeros. ");
+								numero = "";
+							}
+						}
+						while (cep.equals("")) {
+							System.out.println("Cep: ");
+							cep = input.readLine().trim();
+							if (cep.equals("") || cep.equals(null)) {
+								System.out.println("Campo Obrigatório. ");
+							}
+							if (!(cep.matches("[0-9]*$"))) {
+								System.out
+										.println("Digite apenas Números no cep. ");
+								cep = "";
+							}
+						}
+						while (bairro.equals("")) {
+							System.out.println("Bairro: ");
+							bairro = input.readLine().trim();
+							if (bairro.equals("") || bairro.equals(null)) {
+								System.out.println("Campo Obrigatório. ");
+							}
+
+						}
+						while (cidade.equals("")) {
+							System.out.println("Cidade: ");
+							cidade = input.readLine().trim();
+							if (cidade.equals("") || cidade.equals(null)) {
+								System.out.println("Campo Obrigatório. ");
+							}
+							if (!(cidade.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Digite apenas letras no nome da cidade. ");
+								cidade = "";
+							}
+						}
+						while (estado.equals("")) {
+							System.out.println("Estado: ");
+							estado = input.readLine().trim();
+							if (estado.equals("") || estado.equals(null)) {
+								System.out.println("Campo Obrigatório. ");
+							}
+							if (!(estado.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Digite apenas letras no nome estado. ");
+								estado = "";
+							}
+						}
+
+						System.out.println("Complemento: ");
+						complemento = input.readLine().trim();
+
+						while (observacaoSaude.equals("")) {
+
+							System.out.println("Observação de Saude: ");
+							observacaoSaude = input.readLine().trim();
+							if (observacaoSaude.equals("")
+									|| observacaoSaude.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+						}
+
+						while (telefone.equals("")) {
+							System.out.println("Telefone: ");
+							telefone = input.readLine().trim();
+							if (!(telefone.matches("[0-9]*$"))) {
+								System.out
+										.println("Telefone so pode ter numeros. ");
+								telefone = "";
+							} else {
+								break;
+							}
+						}
+						while (dataAdmissao.equals("")) {
+
+							System.out.println("Data de Adimição: ");
+							dataAdmissao = input.readLine().trim();
+							if (dataAdmissao.equals("")) {
+								System.out.println("Campo obrigatório. ");
+							}
+						}
+						while (dataNascimento.equals("")) {
+
+							System.out.println("Data de Nascimento: ");
+							dataNascimento = input.readLine().trim();
+							if (dataNascimento.equals("")) {
+								System.out.println("Campo obrigatório. ");
+							}
+						}
+						while (tipoParto.equals("")) {
+							System.out
+									.println("O parto foi normal ou cesariana? ");
+							tipoParto = input.readLine().trim().toLowerCase();
+							if (!(tipoParto.equals("normal") || tipoParto
+									.equals("cesariana"))) {
+								System.out
+										.println("Tipo de parto desconhecido, por favor informe novamente. ");
+								tipoParto = "";
+							}
+						}
+
+						endereco = new Endereco(rua, numero, cep, bairro,
+								cidade, estado, complemento);
+
+						puerpera = new Puerpera(nome, cpf, cor, dataNascimento,
+								endereco, telefone, dataAdmissao,
+								observacaoSaude, tipoParto);
+						maternidade.addPuerpera(puerpera);
+						break;
+
+					case 2:
+
+						double peso = 0;
+						String nomeRecem = "",
+						sexo = "",
+						corRecem = "",
+						estadoSaude = "",
+						tempoHospitalizacao = "",
+						dataNascimentoRecem = "";
+
+						System.out.println("Digite o cpf da mãe: ");
+						cpf = input.readLine().trim();
+						while (cpf.equals("")) {
+							System.out.println("Cpf: ");
+							cpf = input.readLine().trim();
+							if (cpf.equals("") || cpf.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(cpf.matches("[0-9]*$"))) {
+								System.out.println("Digite apenas numeros. ");
+								cpf = "";
+							}
+						}
+
+						puerpera = maternidade.contemPuerpera(cpf);
+						if (puerpera == null) {
+							System.out.println("Puerpera nao foi encontrada. ");
+							break;
+						}
+						while (nomeRecem.equals("")) {
+							System.out.println("Nome: ");
+							nomeRecem = input.readLine().trim();
+							if (nomeRecem.equals("") || nomeRecem.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(nomeRecem.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Utilise apenas letras no nome");
+								nomeRecem = "";
+							}
+						}
+						while (sexo.equals("")) {
+							System.out.println("Sexo: ");
+							sexo = input.readLine().trim();
+							if (sexo.equals("") || sexo.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(sexo.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Ultilise apenas letras no sexo");
+								sexo = "";
+							}
+						}
+						while (corRecem.equals("")) {
+							System.out.println("Cor: ");
+							corRecem = input.readLine().trim();
+							if (corRecem.equals("") || corRecem.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(corRecem.matches("[a-zA-Z]*$"))) {
+								System.out
+										.println("Ultilize apenas letas na cor");
+								corRecem = "";
+							}
+						}
+						while (dataNascimentoRecem.equals("")) {
+							System.out.println("Data Nascimento: ");
+							dataNascimentoRecem = input.readLine().trim();
+							if (dataNascimentoRecem.equals("")
+									|| dataNascimentoRecem.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+
+						}
+						while (peso <= 0) {
+							System.out.println("Peso: ");
+							peso = sc.nextDouble();
+							if (peso <= 0) {
+								System.out.println("Peso inválido. ");
+							}
+						}
+						while (estadoSaude.equals("")) {
+							System.out
+									.println("Estado de Saude(Saudavel, Natimorto, Neomorto): ");
+							estadoSaude = input.readLine().trim();
+							if (estadoSaude.equals("")
+									|| estadoSaude.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+
+							if (!(estadoSaude.equals("saudavel")
+									|| estadoSaude.equals("natimorto") || estadoSaude
+									.equals("neomorto"))) {
+								System.out
+										.println("Estado de saude não foi reconhecido, por favor informe novamente. ");
+								estadoSaude = "";
+							}
+						}
+						while (tempoHospitalizacao.equals("")) {
+							System.out.println("Tempo de Hospitalização: ");
+							tempoHospitalizacao = input.readLine().trim();
+							if (tempoHospitalizacao.equals("")
+									|| tempoHospitalizacao.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+						}
+						RecemNascido recemNascido = new RecemNascido(nomeRecem,
+								sexo, corRecem, dataNascimentoRecem, peso,
+								tempoHospitalizacao, estadoSaude);
+						System.out.println(puerpera
+								.addRecemNascido(recemNascido));
+						if (puerpera.addRecemNascido(recemNascido) == true) {
+							System.out
+									.println("Recem Nascido cadastrado com sucesso. ");
+						} else {
+							System.out
+									.println("Recem Nascido não foi cadastrado com sucesso. ");
+						}
+						break;
+
+					case 3:
+						System.out.println("Digite o cpf da puérpera:");
+						cpf = input.readLine().trim();
+						while (cpf.equals("")) {
+							System.out.println("Cpf: ");
+							cpf = input.readLine().trim();
+							if (cpf.equals("") || cpf.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(cpf.matches("[0-9]*$"))) {
+								System.out.println("Digite apenas numeros. ");
+								cpf = "";
+							}
+						}
+						System.out.println(maternidade.pesquisaPuerpera(cpf));
+						break;
+
+					case 4:
+						break;
 					}
+					break;
 				}
-				while (dataNascimento.equals("")) {
-					System.out.println("Data de Nascimento: ");
-					dataNascimento = input.readLine().trim();
-					if (dataNascimento.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				puerpera = new Puerpera(nome, cor, dataNascimento, endereco,
-						pontoReferencia, telefone, dataAdmissao,
-						observacaoSaude);
-				maternidade.addPuerpera(puerpera);
 				break;
-
 			case 2:
-
-				System.out.println("Nome da Puérpera? ");
-				nome = input.readLine().trim();
-				if (maternidade.removePuerpera(nome) == true) {
-					System.out.println("Puerpera removida com sucesso. ");
-				} else {
-					System.out.println("Puerpera não pôde ser removida. ");
-				}
-				break;
-
-			case 3:
-
-				double peso = 0;
-				String nomeRecem = "",
-				sexo = "",
-				corRecem = "",
-				observacaoSaudeRecem = "",
-				tempoHospitalizacao = "",
-				dataNascimentoRecem = "";
-
-				while (nomeRecem.equals("")) {
-					System.out.println("Nome: ");
-					nomeRecem = input.readLine().trim();
-					if (nomeRecem.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (sexo.equals("")) {
-					System.out.println("Sexo: ");
-					sexo = input.readLine().trim();
-					if (sexo.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (corRecem.equals("")) {
-					System.out.println("Cor: ");
-					corRecem = input.readLine().trim();
-					if (corRecem.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (dataNascimentoRecem.equals("")) {
-					System.out.println("Data Nascimento: ");
-					dataNascimentoRecem = input.readLine().trim();
-					if (dataNascimentoRecem.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (peso <= 0) {
-					System.out.println("Peso: ");
-					peso = sc.nextDouble();
-					if (peso <= 0) {
-						System.out.println("Peso inválido. ");
-					}
-				}
-				while (observacaoSaudeRecem.equals("")) {
-					System.out.println("Observação de Saude: ");
-					observacaoSaudeRecem = input.readLine().trim();
-					if (observacaoSaudeRecem.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				while (tempoHospitalizacao.equals("")) {
-					System.out.println("Tempo de Hospitalização: ");
-					tempoHospitalizacao = input.readLine().trim();
-					if (tempoHospitalizacao.equals("")) {
-						System.out.println("Campo obrigatório. ");
-					}
-				}
-				recemNascido = new RecemNascido(nomeRecem, sexo, corRecem,
-						dataNascimentoRecem, peso, tempoHospitalizacao,
-						observacaoSaudeRecem);
-				maternidade.addRecemNascido(recemNascido);
-				break;
-
-			case 4:
-
-				System.out.println("Nome do Recem Nascido? ");
-				nome = input.readLine().trim();
-				if (maternidade.removeRecemNascido(nome) == true) {
-					System.out.println("Recem Nascido removido com sucesso. ");
-				} else {
-					System.out.println("Recem Nascido não pôde ser removido. ");
-				}
-				break;
-
-			case 5:
-
-				System.out.println("Digite o nome da puérpera:");
-				nome = input.readLine().trim();
-				System.out.println(maternidade.pesquisaPuerpera(nome));
-				break;
-
-			case 6:
-
-				System.out.println("Digite o nome do bebê");
-				nome = input.readLine().trim();
-				System.out.println(maternidade.pesquisaRecemNascido(nome));
-				break;
-
-			case 7:
 
 				Puerpera puerpera = null;
 				String dataConsulta = "",
 				consulta = "",
 				tipoConsulta = "",
-				confirmaCadastro = "",
-				nomePaciente = "";
-
+				confirmaCadastro = "";
+				String cpf = "",
+				nome = "",
+				tipoParto = "",
+				cor = "",
+				observacaoSaude = "",
+				telefone = "",
+				dataAdmissao = "",
+				dataNascimento = "",
+				rua = "",
+				numero = "",
+				cep = "",
+				bairro = "",
+				cidade = "",
+				estado = "",
+				complemento = "";
 				while (tipoConsulta.equals("")) {
 
 					System.out.println("A consulta é normal ou urgente? ");
 					tipoConsulta = input.readLine().trim().toLowerCase();
+					if (!(tipoConsulta.equals("normal") || tipoConsulta
+							.equals("urgente"))) {
+						tipoConsulta = "";
+
+					}
 
 				}
 				while (confirmaCadastro.equals("")) {
@@ -243,79 +435,173 @@ public class Main {
 				}
 				if (confirmaCadastro.equals("s")
 						|| confirmaCadastro.equals("sim")) {
-
-					while (nomePaciente.equals("")) {
-
-						System.out.println("Qual o nome da paciente? ");
-						nomePaciente = input.readLine();
-
-					}
-					puerpera = maternidade.contemPuerpera(nomePaciente);
-					if (puerpera.equals(null)) {
-						System.out.println("Puerpera ao foi encontrada. ");
-						confirmaCadastro = "nao";
-					}
-
+					System.out.println("Informe seu CPF: ");
+					cpf = input.readLine();
+					puerpera = maternidade.contemPuerpera(cpf);
 				}
+
 				if (confirmaCadastro.equals("n")
 						|| confirmaCadastro.equals("nao")
 						|| confirmaCadastro.equals("não")) {
 
-					String nome1 = "", cor1 = "", endereco1 = "", pontoReferencia1, observacaoSaude1 = "", telefone1 = "", dataAdmissao1 = "", dataNascimento1 = "";
+					while (nome.equals("")) {
 
-					while (nome1.equals("")) {
 						System.out.println("Nome: ");
-						nome1 = input.readLine().trim();
-						if (nome1.equals("")) {
+						nome = input.readLine().trim();
+						if (nome.equals("") || nome.equals(null)) {
 							System.out.println("Campo obrigatório. ");
 						}
+						if (!(nome.matches("[a-zA-Z]*$"))) {
+							System.out
+									.println("Digite apenas letras no nome. ");
+							nome = "";
+						}
 					}
-					while (cor1.equals("")) {
+					while (cpf.equals("")) {
+						System.out.println("Cpf: ");
+						cpf = input.readLine().trim();
+						if (cpf.equals("") || cpf.equals(null)) {
+							System.out.println("Campo obrigatório. ");
+						}
+						if (!(cpf.matches("[0-9]*$"))) {
+							System.out.println("Digite apenas numeros. ");
+							cpf = "";
+						}
+					}
+					while (cor.equals("")) {
+
 						System.out.println("Cor: ");
-						cor1 = input.readLine().trim();
-						if (cor1.equals("")) {
+						cor = input.readLine().trim();
+						if (cor.equals("") || cor.equals(null)) {
 							System.out.println("Campo obrigatório. ");
 						}
+						if (!(cor.matches("[a-zA-Z]*$"))) {
+							System.out.println("Digite apenas letas na cor. ");
+							cor = "";
+						}
 					}
-					while (endereco1.equals("")) {
-						System.out.println("Endereço: ");
-						endereco1 = input.readLine().trim();
-						if (endereco1.equals("")) {
-							System.out.println("Campo obrigatório. ");
+					while (rua.equals("")) {
+						System.out.println("Rua: ");
+						rua = input.readLine().trim();
+						if (rua.equals("") || rua.equals(null)) {
+							System.out.println("Campo Obrigatório. ");
+						}
+					}
+					while (numero.equals("")) {
+						System.out.println("Numero: ");
+						numero = input.readLine().trim();
+						if (numero.equals("") || numero.equals(null)) {
+							System.out.println("Campo Obrigatório. ");
+						}
+						if (!(numero.matches("[0-9]*$"))) {
+							System.out.println("Digite apenas numeros. ");
+							numero = "";
+						}
+					}
+					while (cep.equals("")) {
+						System.out.println("Cep: ");
+						cep = input.readLine().trim();
+						if (cep.equals("") || cep.equals(null)) {
+							System.out.println("Campo Obrigatório. ");
+						}
+						if (!(cep.matches("[0-9]*$"))) {
+							System.out
+									.println("Digite apenas Números no cep. ");
+							cep = "";
+						}
+					}
+					while (bairro.equals("")) {
+						System.out.println("Bairro: ");
+						bairro = input.readLine().trim();
+						if (bairro.equals("") || bairro.equals(null)) {
+							System.out.println("Campo Obrigatório. ");
+						}
+
+					}
+					while (cidade.equals("")) {
+						System.out.println("Cidade: ");
+						cidade = input.readLine().trim();
+						if (cidade.equals("") || cidade.equals(null)) {
+							System.out.println("Campo Obrigatório. ");
+						}
+						if (!(cidade.matches("[a-zA-Z]*$"))) {
+							System.out
+									.println("Digite apenas letras no nome da cidade. ");
+							cidade = "";
+						}
+					}
+					while (estado.equals("")) {
+						System.out.println("Estado: ");
+						estado = input.readLine().trim();
+						if (estado.equals("") || estado.equals(null)) {
+							System.out.println("Campo Obrigatório. ");
+						}
+						if (!(estado.matches("[a-zA-Z]*$"))) {
+							System.out
+									.println("Digite apenas letras no nome estado. ");
+							estado = "";
 						}
 					}
 
-					System.out.println("Ponto de Referencia: ");
-					pontoReferencia1 = input.readLine().trim();
+					System.out.println("Complemento: ");
+					complemento = input.readLine().trim();
 
-					while (observacaoSaude1 == "") {
+					while (observacaoSaude.equals("")) {
+
 						System.out.println("Observação de Saude: ");
-						observacaoSaude1 = input.readLine().trim();
-						if (observacaoSaude1.equals("")) {
+						observacaoSaude = input.readLine().trim();
+						if (observacaoSaude.equals("")
+								|| observacaoSaude.equals(null)) {
 							System.out.println("Campo obrigatório. ");
 						}
 					}
-					System.out.println("Telefone: ");
-					telefone1 = input.readLine().trim();
 
-					while (dataAdmissao1.equals("")) {
+					while (telefone.equals("")) {
+						System.out.println("Telefone: ");
+						telefone = input.readLine().trim();
+						if (!(telefone.matches("[0-9]*$"))) {
+							System.out
+									.println("Telefone so pode ter numeros. ");
+							telefone = "";
+						} else {
+							break;
+						}
+					}
+					while (dataAdmissao.equals("")) {
+
 						System.out.println("Data de Adimição: ");
-						dataAdmissao1 = input.readLine().trim();
-						if (dataAdmissao1.equals("")) {
+						dataAdmissao = input.readLine().trim();
+						if (dataAdmissao.equals("")) {
 							System.out.println("Campo obrigatório. ");
 						}
 					}
-					while (dataNascimento1.equals("")) {
+					while (dataNascimento.equals("")) {
+
 						System.out.println("Data de Nascimento: ");
-						dataNascimento1 = input.readLine().trim();
-						if (dataNascimento1.equals("")) {
+						dataNascimento = input.readLine().trim();
+						if (dataNascimento.equals("")) {
 							System.out.println("Campo obrigatório. ");
 						}
 					}
-					puerpera = new Puerpera(nome1, cor1, dataNascimento1,
-							endereco1, pontoReferencia1, telefone1,
-							dataAdmissao1, observacaoSaude1);
+					while (tipoParto.equals("")) {
+						System.out.println("O parto foi normal ou cesariana? ");
+						tipoParto = input.readLine().trim().toLowerCase();
+						if (!(tipoParto.equals("normal") || tipoParto
+								.equals("cesariana"))) {
+							System.out
+									.println("Tipo de parto desconhecido, por favor informe novamente. ");
+							tipoParto = "";
+						}
+					}
+
+					endereco = new Endereco(rua, numero, cep, bairro, cidade,
+							estado, complemento);
+
+					puerpera = new Puerpera(nome, cpf, cor, dataNascimento,
+							endereco, telefone, dataAdmissao, observacaoSaude,
+							tipoParto);
 					maternidade.addPuerpera(puerpera);
+					break;
 				}
 				while (dataConsulta.equals("")) {
 
@@ -334,11 +620,16 @@ public class Main {
 						tipoConsulta);
 				break;
 
-			case 8:
-				
-				System.out.println();
-				
-			case 9:
+			case 3:
+				System.out.println(maternidade.consultasAgendadas());
+				break;
+
+			case 4:
+
+				System.out.println(maternidade.balancoGeral());
+				break;
+
+			case 5:
 
 				System.out.println("Fim.");
 				System.exit(1);
