@@ -104,6 +104,7 @@ public class RecemNascido extends Pessoa {
 	 * Compara dois Recem Nascidos.
 	 * 
 	 * @return boolean
+	 * retorna true caso os dois recem nascidos sejam iguais e false caso contrario
 	 */
 	public boolean equals(Object objeto) {
 		if (!(objeto instanceof RecemNascido)) {

@@ -32,7 +32,8 @@ public class Pessoa {
 	public Pessoa(String nome, String cor, String dataNascimento)
 			throws Exception {
 		if (nome.trim().equals("") || nome.trim().equals(null)
-				|| cor.trim().equals("") || cor.trim().equals(null)) {
+				|| cor.trim().equals("") || cor.trim().equals(null)
+				||dataNascimento.trim().equals("")|| dataNascimento.equals(null)) {
 			throw new IllegalArgumentException(
 					"Os campos nao devem ser deixados vazios");
 
