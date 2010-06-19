@@ -145,11 +145,10 @@ public class Puerpera extends Pessoa {
 	 * @return O string com as informações da Puerpera.
 	 */
 	public String toString() {
-		return "CPF: " + getCpf()
-		        + "\nNome: " + getNome() + "\nCor: " + getCor()
-				+ "   Data Nascimento: " + getDataNascimento() + "\nEndereco: "
-				+ getEndereco() + "\nTelefone: " + getTelefone()
-				+ "   Data de Admissão: " + getDataAdmissao()
+		return "CPF: " + getCpf() + "\nNome: " + getNome() + "\nCor: "
+				+ getCor() + "   Data Nascimento: " + getDataNascimento()
+				+ "\nEndereco: " + getEndereco() + "\nTelefone: "
+				+ getTelefone() + "   Data de Admissão: " + getDataAdmissao()
 				+ "\nObservacao Saude: " + getObservacaoSaude();
 	}
 
@@ -180,9 +179,8 @@ public class Puerpera extends Pessoa {
 		}
 		listaRecem.add(recemNascido);
 		return true;
-			
-		}
-	
+
+	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
