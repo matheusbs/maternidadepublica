@@ -62,11 +62,12 @@ public class Main {
 			case 1:
 				int option = 0;
 
-				while (option >= 0 || option <= 3) {
+				while (option >= 0 || option <= 4) {
 					System.out.println("1 - Cadastrar puerpera. ");
 					System.out.println("2 - Cadastrar Recem Nascido. ");
-					System.out.println("3 - Visualizar puerpera. ");
-					System.out.println("4 - Voltar ao menu principal.");
+					System.out.println("3 - Remover Puerpera. ");
+					System.out.println("4 - Visualizar puerpera. ");
+					System.out.println("5 - Voltar ao menu principal.");
 					System.out.println("Selecione sua Opção: ");
 					option = sc.nextInt();
 
@@ -372,6 +373,32 @@ public class Main {
 						break;
 
 					case 3:
+
+						System.out.println("Digite o cpf da puérpera:");
+						cpf = input.readLine().trim();
+						while (cpf.equals("")) {
+							System.out.println("Cpf: ");
+							cpf = input.readLine().trim();
+							if (cpf.equals("") || cpf.equals(null)) {
+								System.out.println("Campo obrigatório. ");
+							}
+							if (!(cpf.matches("[0-9]*$"))) {
+								System.out.println("Digite apenas numeros. ");
+								cpf = "";
+							}
+						}
+						boolean remove;
+						remove = maternidade.removePuerpera(cpf);
+						if (remove == true) {
+							System.out
+									.println("Puerpera removida com sucesso. ");
+						} else {
+							System.out
+									.println("Puerpera não pôde ser removida. ");
+						}
+						break;
+
+					case 4:
 						System.out.println("Digite o cpf da puérpera:");
 						cpf = input.readLine().trim();
 						while (cpf.equals("")) {
@@ -388,7 +415,7 @@ public class Main {
 						System.out.println(maternidade.pesquisaPuerpera(cpf));
 						break;
 
-					case 4:
+					case 5:
 						break;
 					}
 					break;
