@@ -1,0 +1,1 @@
+A maternidade pública de Gongolópoles, após receber verba do Governo, resolveu contratar alunos capacitados graduandos em Ciência da Computação na Universidade Federal de Campina Grande para desenvolverem um software que trate da parte administrativa de toda a maternidade, pois o armazenamento dos dados através de papéis e a busca para essas informações estão ficando inviáveis.
